@@ -64,8 +64,8 @@ char pressHpaString[6];
 char voltageString[6];
 String responseJson;
 
-const char* ssid = "i2"; // WiFi network SSID
-const char* password = "040110040110"; // WiFi network password
+const char* ssid = "ssid"; // WiFi network SSID
+const char* password = "pass"; // WiFi network password
 const char* mqtt_server = "192.168.1.99"; // MQTT broker URL
 const char* mqtt_username = "admin";      // MQTT client user name, if needed
 const char* mqtt_password = "12345678";   // MQTT client password, if needed
