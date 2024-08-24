@@ -50,7 +50,7 @@
 #include <Adafruit_Sensor.h>
 #include <GyverBME280.h>
 
-#define SLEEP_DELAY_IN_SECONDS  60
+#define SLEEP_DELAY_IN_SECONDS  1800
 
 GyverBME280 bme;
 
@@ -65,13 +65,13 @@ char voltageString[6];
 String responseJson;
 
 const char* ssid = "ssid"; // WiFi network SSID
-const char* password = "pass"; // WiFi network password
+const char* password = "password"; // WiFi network password
 const char* mqtt_server = "192.168.1.99"; // MQTT broker URL
-const char* mqtt_username = "admin";      // MQTT client user name, if needed
-const char* mqtt_password = "12345678";   // MQTT client password, if needed
+const char* mqtt_username = "username";      // MQTT client user name, if needed
+const char* mqtt_password = "passmqtt";   // MQTT client password, if needed
 
 //We will use static ip
-IPAddress ip(192, 168, 1, 92 );// pick your own suitable static IP address
+IPAddress ip(192, 168, 1, 37 );// pick your own suitable static IP address
 IPAddress gateway(192, 168, 1, 1); // may be different for your network
 IPAddress subnet(255, 255, 255, 0); // may be different for your network (but this one is pretty standard)
 IPAddress dns(192, 168, 1, 1);
@@ -167,8 +167,8 @@ void connect_mqtt() //Connecting to the MQTT broker
         Serial.println(" connected!");
         // Once connected, publish an announcement...
         Serial.println("Sending topic(s)...");
-        client.publish("sensor/external", responseJson.c_str(), true);
-        client.publish("sensors/test/voltage", dtostrf(level/100, 2, 2, voltageString));
+        client.publish("sensor2/external", responseJson.c_str(), true);
+        client.publish("sensor2/test/voltage", dtostrf(level/100, 2, 2, voltageString));
       }
      else
       {
@@ -209,7 +209,7 @@ void loop()
 
     // Reading voltage
     float rawLevel = analogRead(A0);
-    level = map(rawLevel, 98, 192, 200, 400); // You need to adjust these values according to the voltage divider you install
+    level = (float)rawLevel / 10 / (10000. / (43500 + 10000)); // You need to adjust these values according to the voltage divider you install
 
     Serial.println("");
     Serial.println("Temperature:");
