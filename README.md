@@ -41,5 +41,10 @@
  them!
  And of course it is in public domain.
 
+
+P.S. Added esp32c3 version with aht20 sensor. It work no goood with low Vcc. You need add dc-dc converter like here https://mysku.club/blog/diy/95537.html/
+
+
+
  Enjoy!
  
